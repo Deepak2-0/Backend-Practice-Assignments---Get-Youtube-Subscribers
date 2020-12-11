@@ -30,8 +30,11 @@ app.get("/subscribers/:id", async(req,res)=>{
 
     let subscriber = await Subscribers.find({_id:id});
     //console.log(subscriber);
-    res.send(subscriber);
-    //res.send(id);
+    if(subscriber.length === 0){
+        res.status(400).send({message: "error.message"});
+        return;
+    }
+    res.send(subscriber[0]);
 })
 
 module.exports = app;
