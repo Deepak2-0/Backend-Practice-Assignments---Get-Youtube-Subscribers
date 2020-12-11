@@ -31,10 +31,10 @@ app.get("/subscribers/:id", async(req,res)=>{
     try {
         let subscriber = await Subscribers.find({_id:id});
     //console.log(subscriber);
-        // if(subscriber.length === 0){
-        //     res.status(400).send({message: "error.message"});
-        //     return;
-        // }
+        if(subscriber.length === 0){
+            res.status(404).send({message: "id not found"});
+            return;
+        }
         res.send(subscriber[0]);
 
     } catch (error) {
